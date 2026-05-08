@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\DTOs\UserDto;
+use App\DTOs\UserUpdateDto;
 use App\Http\Requests\Api\UserRequest;
+use App\Http\Requests\Api\UserUpdateRequest;
 use App\Services\UserService;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -26,27 +27,22 @@ class UserController extends Controller
         return $this->userService->store($dto);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(int $id)
     {
-        //
+        $result = $this->userService->show($id);
+
+        return $result;
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UserUpdateRequest $request, int $id)
     {
-        //
+        $dto = UserUpdateDto::fromRequest($request);
+
+        return $this->userService->update($id, $dto);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        return $this->userService->destroy($id);
     }
 }
