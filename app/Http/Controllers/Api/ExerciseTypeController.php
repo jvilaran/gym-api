@@ -5,12 +5,23 @@ namespace App\Http\Controllers\Api;
 use App\DTOs\ExerciseTypeDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ExerciseTypeRequest;
+use App\Http\Requests\Api\FromCatalogRequest;
 use App\Services\ExerciseTypeService;
 use Illuminate\Http\Request;
 
 class ExerciseTypeController extends Controller
 {
     public function __construct(protected ExerciseTypeService $exerciseTypeService){}
+
+    public function fromCatalog(FromCatalogRequest $request)
+    {
+        $validated = $request->validated();
+
+        return $this->exerciseTypeService->fromCatalog(
+            $validated['catalog_id'],
+            $validated['lang'] ?? null,
+        );
+    }
 
     public function index()
     {

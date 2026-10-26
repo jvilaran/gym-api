@@ -12,6 +12,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->boolean('status')->default(true);
+            // Catalog metadata (null for manually created types).
+            $table->string('catalog_id')->nullable()->unique();
+            $table->string('slug')->nullable();
+            $table->string('muscle')->nullable();
+            $table->string('equipment')->nullable();
+            $table->string('gif_url')->nullable();
             $table->timestamps();
         });
     }

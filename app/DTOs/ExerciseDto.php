@@ -3,9 +3,8 @@
 namespace App\DTOs;
 
 use App\Http\Requests\Api\ExerciseRequest;
-use Illuminate\Http\Request;
 
-readonly class ExerciseDto 
+readonly class ExerciseDto
 {
     public function __construct(
         public int $userId,
@@ -15,11 +14,12 @@ readonly class ExerciseDto
         public int $reps
     ) {}
 
-    public static function fromRequest(ExerciseRequest $request): self {
+    public static function fromRequest(ExerciseRequest $request, int $userId): self
+    {
         $validated = $request->validated();
-        
+
         return new self(
-            userId: $validated['user_id'],
+            userId: $userId,
             exerciseTypeId: $validated['exercise_type_id'],
             weight: $validated['weight'],
             series: $validated['series'],

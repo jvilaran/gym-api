@@ -10,9 +10,13 @@ return new class extends Migration
     {
         Schema::create('exercises', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('exercise_type_id');
-            $table->float('weight', 2);
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnDelete();
+            $table->foreignId('exercise_type_id')
+                ->constrained()
+                ->cascadeOnDelete();
+            $table->decimal('weight', 8, 2);
             $table->integer('series');
             $table->integer('reps');
             $table->timestamps();

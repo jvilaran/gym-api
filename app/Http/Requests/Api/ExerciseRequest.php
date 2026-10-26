@@ -17,8 +17,7 @@ class ExerciseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'integer'],
-            'exercise_type_id' => ['required', 'integer'],
+            'exercise_type_id' => ['required', 'integer', 'exists:exercise_types,id'],
             'weight' => ['required', 'numeric', 'min:0'],
             'series' => ['required', 'integer', 'min:1'],
             'reps' => ['required', 'integer', 'min:1'],
